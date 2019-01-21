@@ -1,0 +1,57 @@
+export const DISHES =
+    [
+        {
+            id: 0,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        },
+        {
+            id: 1,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        },
+        {
+            id: 2,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        },
+        {
+            id: 3,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        },
+        {
+            id: 4,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        },
+        {
+            id: 5,
+            name:'Pizza',
+            image: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180',
+            category: 'mains',
+            label:'Hot',
+            price:'4.99',
+            description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.',                        
+        }
+    ];
