@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Card, CardBody, CardTitle, CardSubtitle, CardImg, CardText, Button, CardGroup, Col, Row} from 'reactstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from './Cart/cart';
 import {DISHES} from '../shared/dishes';
 class Menu extends Component {
@@ -19,9 +18,8 @@ class Menu extends Component {
         if(index<0)
         {
             this.state.dishSelected.push(selected);
-            
         }
-        this.setState({dishSelected:this.state.dishSelected}); //TO UPDATE in Cart we need to call this function
+        this.setState({dishSelected: this.state.dishSelected}); //TO UPDATE in Cart we need to call this function
     }
 
     handleChange(dishSelectedUpdated)
