@@ -6,7 +6,6 @@ import RenderSubmit from './RenderSubmit';
 class Cart extends Component {
     constructor(props){
         super(props);
-        console.log(this.props.dishSelected);
         this.state={
             dishes: DISHES,
         }
