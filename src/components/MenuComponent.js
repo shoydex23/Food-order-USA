@@ -15,17 +15,11 @@ class Menu extends Component {
 
     onSelect(selected)
     {
-        //var id="button"+selected;
         const index = this.state.dishSelected.indexOf(selected);
         if(index<0)
         {
             this.state.dishSelected.push(selected);
-            console.log("dish added "+this.state.dishSelected);
             
-        }
-        else{
-            //this.setState({this.state.dishSelected[index][1]=count);
-            //console.log("Added "+selected);
         }
         this.setState({dishSelected:this.state.dishSelected}); //TO UPDATE in Cart we need to call this function
     }

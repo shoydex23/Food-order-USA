@@ -14,18 +14,13 @@ class Cart extends Component {
     componentDidMount()
     {
         this.setState({dishes: DISHES});
-        console.log("Component Mounted"+this.props.dishSelected);
+        
     }
 
     checkIndex(dish)
     {
         var index=this.props.dishSelected.indexOf(dish.id);
-        if(index<0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return (index>=0);
     }
 
     renderHeading()
@@ -34,7 +29,7 @@ class Cart extends Component {
         {
             return(
                 <div>
-                    <h3>Order Summary</h3>
+                <h3>Order Summary</h3>
                 </div>
             )
         }
@@ -99,7 +94,6 @@ class Cart extends Component {
             <div>
                 {this.renderHeading()}
                 {this.renderDishes()}
-                {console.log(this.props.dishSelected)}
                 {this.renderSubmit()}
             </div>
             </div>
