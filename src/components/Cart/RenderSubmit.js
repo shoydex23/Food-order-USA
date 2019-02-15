@@ -7,7 +7,7 @@ const RenderSubmit = (props) =>
             return(
                 <div>
                     <Card>
-                    <Button onClick={() => props.handleChange([])}>Place your order</Button>
+                    <Button onClick={() => props.handleChange(props.dishSelected,1)}>Place your order</Button>
                     </Card>
                 </div>
             )

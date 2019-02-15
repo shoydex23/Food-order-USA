@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Card, CardBody, CardTitle, CardSubtitle, CardImg, CardText, Button, CardGroup, Col, Row} from 'reactstrap';
 import Cart from './Cart/cart';
 import {DISHES} from '../shared/dishes';
+import axios from 'axios';
 class Menu extends Component {
     constructor(props){
         super(props);
@@ -9,6 +10,7 @@ class Menu extends Component {
         this.state={ 
             dishSelected: [],
             dishes: DISHES,
+            order: [],
         }
     }
 
@@ -22,9 +24,42 @@ class Menu extends Component {
         this.setState({dishSelected: this.state.dishSelected}); //TO UPDATE in Cart we need to call this function
     }
 
-    handleChange(dishSelectedUpdated)
+    orderIt(dish)
     {
-        this.setState({dishSelected: dishSelectedUpdated});
+        const x = this.state.dishSelected.indexOf(dish.id);
+        if(x>=0)
+        {
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+
+
+    handleChange(dishSelectedUpdated,order)
+    {
+        if(order===1)
+        {
+
+            const dishes=this.state.dishes.filter(dish => this.orderIt(dish));
+            axios.post('http://localhost:3001/order',{orders: dishes})
+            .then((response) => {
+                console.log(response);
+            })
+            .catch(error => {
+            console.log(error);
+            });
+            this.setState({dishSelected: []});
+            
+        }
+        else
+        {
+            console.log("Order Updated");
+            this.setState({dishSelected: dishSelectedUpdated});
+        }
+        
+        
     }
 
     render() {
@@ -57,7 +92,6 @@ class Menu extends Component {
                 </Col>
             </Row>
         </div>
-
     );
   }
 }

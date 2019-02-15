@@ -26,7 +26,7 @@ class RenderDishes extends Component
         var par=this.props.dishSelected;
         var ind=this.props.dishSelected.indexOf(index);
         par.splice(ind,1);
-        this.props.handleChange(par);
+        this.props.handleChange(par,0);
     }
 
     render()
@@ -38,6 +38,7 @@ class RenderDishes extends Component
                         <Card key={dish.id}>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.id}</CardText>
+                        <CardText>{dish.category}</CardText>
                         <Button onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
                         </Card>
                     </div>
