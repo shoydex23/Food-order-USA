@@ -14,6 +14,7 @@ class Menu extends Component {
         }
     }
 
+
     onSelect(selected)
     {
         const index = this.state.dishSelected.indexOf(selected);
