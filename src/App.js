@@ -5,12 +5,12 @@ import Main from './components/main';
 import {Link} from 'react-router-dom';
 import './App.css';
 class App extends Component {
-  
+
   render() {
     return (
       <div className="demo-big-content">
         <Layout>
-            <Header className="header-color" title="Food-Order-USA" scroll>
+            <Header id="header" className="header-color" title="Food-Order-USA" scroll>
             
             <Navigation>
             <Link to ="/">Home</Link>

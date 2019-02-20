@@ -6,7 +6,7 @@ const RenderHeading = (props) =>
         {
             return(
                 <div>
-                <h3>Order Summary</h3>
+                <h3 className="header">Order Summary</h3>
                 </div>
             )
         }

@@ -1,50 +1,67 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
+import {Redirect} from 'react-router-dom';
+import Admin from "./admin";
+import {withCookies,Cookies} from 'react-cookie';
+import {instanceOf} from 'prop-types';
 
 export default class Login extends Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
   constructor(props) {
     super(props);
-
     this.state = {
-      email: "",
-      password: ""
+      username: "",
+      password: "",
+      login: false,
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.username.length > 0 && this.state.password.length > 0;
   }
 
   handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
+    
   }
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state.email);
+    console.log(this.state.username);
     console.log(this.state.password);
+    if(this.state.username==="admin" && this.state.password==="password")
+    {
+      //cookies.set('username', this.state.username, { path: '/' });
+      //cookies.set('password', this.state.password, { path: '/' });
+      this.setState({login: true});
+    }
   }
 
 
 
   render() {
+    if(this.state.login===false)
+    {
     return (
       <div className="Login">
         <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="username" bsSize="large">
+            <ControlLabel>Username</ControlLabel>
             <FormControl
               autoFocus
-              type="email"
-              value={this.state.email}
+              type="username"
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>PAssword</ControlLabel>
+            <ControlLabel>Password</ControlLabel>
             <FormControl
               value={this.state.password}
               onChange={this.handleChange}
@@ -64,4 +81,8 @@ export default class Login extends Component {
       </div>
     );
   }
+  else{
+    return(<Redirect to={{pathname: "/admin", state: {username: this.state.username, password: this.state.password}}} Component={Admin} />)
+    }
+  } 
 }

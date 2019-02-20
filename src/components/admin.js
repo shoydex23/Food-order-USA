@@ -2,44 +2,68 @@ import React, { Component } from "react";
 import {Card, CardText, CardTitle} from 'reactstrap';
 import {Button} from "react-bootstrap";
 import axios from 'axios';
+import {Cookies} from 'react-cookie';
+import { instanceOf } from "prop-types";
 
 export default class Admin extends Component {
+  
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
   constructor(props) {
     super(props);
-
     this.state = {
-      orders: []
+      orders: [],
+      username: "",
+      password: "" ,
     };
   }
 
-  componentDidMount()
+  fetchOrders(username, pass)
   {
-      this.displayOrders();
-  }
-
-  displayOrders()
-  {
-    axios.get('http://localhost:3001/order')
-    .then((response) => {
+    var abcd="";
+    var final="";
+    if(this.state.username!=="admin" && this.props.location.state===undefined)
+    {
+      alert("if 1");
+      this.props.history.push("/");
+    }
+    else if(this.props.location.state!==undefined)
+    {
+      final=this.props.location.state.username+':'+this.props.location.state.password;
+      this.setState({username: this.props.location.username, password: this.props.location.password});
+      abcd=btoa(final);
+      console.log(abcd);
+      axios.get('http://localhost:3001/admin',{headers: {"Authorization": `Basic ${abcd}`}})
+      .then((response) => {
+          const ord = this.handleOrder(response.data);
+          ord.reverse();
+          this.setState({orders: ord});
+      })
+      .catch(error => {
+      console.log(error);
+      this.props.history.push("/");
+      });
+    }
+    else{
+      axios.get('http://localhost:3001/admin')
+      .then((response) => {
         const ord = this.handleOrder(response.data);
         ord.reverse();
         this.setState({orders: ord});
-        console.log(response.data);
-        console.log(this.state.orders);
-    })
-    .catch(error => {
-    console.log(error);
-    });
+      })
+      .catch(error => {
+      console.log(error);
+      });
+    }
   }
 
   handleOrder(order)
   {
     const ord = order.map((orda) => 
     {
-        //console.log(this.state.orders.indexOf(order));
-        console.log(orda);
-        const x = [0].map(() => {return(<div key="-1">{orda._id}</div>)});
-        console.log(x);
+        const x = [0].map(() => {return(<div key="-1">Order no. {order.indexOf(orda)}</div>)});
         const abc = orda.orders.map((dish)=> {
                return (
                 <div key={dish.id} className="col-4 m-1">
@@ -53,7 +77,6 @@ export default class Admin extends Component {
         const y= [0].map(() => {return(<div key="-2"><br></br></div>)});
         var bca = x.concat(abc);
         var xyz = bca.concat(y);
-        console.log(xyz);
         return xyz;
     });
     return ord;
@@ -61,13 +84,10 @@ export default class Admin extends Component {
 
   render() {
 
-    const menu = this.state.orders.map((order) => {return(this.handleOrder([]))});
-    
     return (
         <div>
             <div>{this.state.orders}</div>
-            <div>{menu}</div>
-            <Button onClick={()=>this.displayOrders()}>Display</Button>
+            <Button onClick={() => {this.fetchOrders()}}>Display</Button>
         </div>
     );
   }

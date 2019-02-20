@@ -3,6 +3,7 @@ import {Card, CardBody, CardTitle, CardSubtitle, CardImg, CardText, Button, Card
 import Cart from './Cart/cart';
 import {DISHES} from '../shared/dishes';
 import axios from 'axios';
+import './MenuComponent.css';
 class Menu extends Component {
     constructor(props){
         super(props);
@@ -13,8 +14,7 @@ class Menu extends Component {
             order: [],
         }
     }
-
-
+   
     onSelect(selected)
     {
         const index = this.state.dishSelected.indexOf(selected);
@@ -67,13 +67,13 @@ class Menu extends Component {
         const menu = this.state.dishes.map((dish) => {
             return (
                 <div key={dish.id} className="col-4">
-                    <Card key={dish.id} color="primary" className="col-12 m-1">
+                    <Card key={dish.id} className="card col-12 m-1">
                         <CardImg top width="100%" src={dish.image} alt={dish.name} />
                         <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardSubtitle>{dish.category}</CardSubtitle>
                         <CardText>{dish.description}</CardText>
-                        <Button id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
+                        <Button className="card" id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
                         </CardBody>
                     </Card>
                 </div>
@@ -82,8 +82,8 @@ class Menu extends Component {
 
     return (
         <div>
-            <Row>
-                <Col md="9">
+            <Row className="menu">
+                <Col  md="9">
                     <CardGroup>
                         { menu } 
                     </CardGroup> 

@@ -1,0 +1,8 @@
+@media all and (min-width: 480px) {
+    .cart{
+        background: none;
+    }    
+    .header{
+        color:white;
+    }
+}

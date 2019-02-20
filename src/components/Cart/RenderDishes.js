@@ -35,11 +35,11 @@ class RenderDishes extends Component
                 if (this.checkIndex(dish))    
                 {   return (
                     <div key={dish.id} className="col-12 m-1">
-                        <Card key={dish.id}>
+                        <Card className="card"key={dish.id}>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardText>{dish.id}</CardText>
                         <CardText>{dish.category}</CardText>
-                        <Button onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
+                        <Button className="card" onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
                         </Card>
                     </div>
                     );
