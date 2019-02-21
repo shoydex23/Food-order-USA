@@ -3,12 +3,12 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import {Redirect} from 'react-router-dom';
 import Admin from "./admin";
-import {withCookies,Cookies} from 'react-cookie';
+import {Cookies} from 'react-cookie';
 import {instanceOf} from 'prop-types';
 
 export default class Login extends Component {
   static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
+    cookies: instanceOf(Cookies)
   };
 
   constructor(props) {
@@ -39,18 +39,26 @@ export default class Login extends Component {
     {
       //cookies.set('username', this.state.username, { path: '/' });
       //cookies.set('password', this.state.password, { path: '/' });
+      this.setCookies();
       this.setState({login: true});
     }
   }
 
-
+  setCookies()
+  {
+    const cookie= new Cookies();
+    cookie.set("name", "admin");
+    cookie.set("pass", "password");
+  }
 
   render() {
     if(this.state.login===false)
     {
     return (
       <div className="Login">
+        
         <form onSubmit={this.handleSubmit}>
+
           <FormGroup controlId="username" bsSize="large">
             <ControlLabel>Username</ControlLabel>
             <FormControl
@@ -68,7 +76,7 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
-          <Button
+          <Button className="but"
             block
             bsSize="large"
             disabled={!this.validateForm()}

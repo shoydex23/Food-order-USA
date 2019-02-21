@@ -5,7 +5,19 @@
     background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     }
-    .card{
-        background-color: #00aaff;
+    .dcard{
+        color: white;
+        background-color: rgba(0,0,0,0);
+        border: none;
+    }
+    .dcard:hover{
+        background-color: rgba(0,0,0,0.2);
+    }
+    .dishcart{
+        color: white;
+        text-align: center;
+    }
+    .button{
+        font-size: 120%;
     }
 }

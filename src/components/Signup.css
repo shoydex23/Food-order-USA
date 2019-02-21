@@ -1,6 +1,7 @@
 @media all and (min-width: 480px) {
     .Signup {
       padding: 60px 0;
+      height: 100%;
       background: #833ab4;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
@@ -9,6 +10,8 @@ background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
     .Signup form {
       margin: 0 auto;
       max-width: 320px;
+      color: white;
+      font-size: 120%;
     }
   }
   

@@ -67,13 +67,13 @@ class Menu extends Component {
         const menu = this.state.dishes.map((dish) => {
             return (
                 <div key={dish.id} className="col-4">
-                    <Card key={dish.id} className="card col-12 m-1">
+                    <Card key={dish.id} className="dcard col-12 m-1">
                         <CardImg top width="100%" src={dish.image} alt={dish.name} />
                         <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardSubtitle>{dish.category}</CardSubtitle>
                         <CardText>{dish.description}</CardText>
-                        <Button className="card" id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
+                        <Button className="dcard button" id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
                         </CardBody>
                     </Card>
                 </div>
@@ -88,7 +88,8 @@ class Menu extends Component {
                         { menu } 
                     </CardGroup> 
                 </Col>
-                <Col md="3">
+                <Col className="dishcart" md="3">
+                    <h3>Order Summary</h3>
                     <Cart dishSelected={this.state.dishSelected} handleChange={this.handleChange}/>
                 </Col>
             </Row>

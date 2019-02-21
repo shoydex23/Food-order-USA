@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Card, CardTitle, CardText,Button} from 'reactstrap';
+import './cart.css';
 class RenderDishes extends Component
 {
     constructor(props)
@@ -35,11 +36,10 @@ class RenderDishes extends Component
                 if (this.checkIndex(dish))    
                 {   return (
                     <div key={dish.id} className="col-12 m-1">
-                        <Card className="card"key={dish.id}>
+                        <Card className="ccard" key={dish.id}>
                         <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.id}</CardText>
                         <CardText>{dish.category}</CardText>
-                        <Button className="card" onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
+                        <Button className="ccard" onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
                         </Card>
                     </div>
                     );

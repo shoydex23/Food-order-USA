@@ -8,7 +8,7 @@ import { instanceOf } from "prop-types";
 export default class Admin extends Component {
   
   static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
+    cookies: instanceOf(Cookies)
   };
 
   constructor(props) {
@@ -20,21 +20,14 @@ export default class Admin extends Component {
     };
   }
 
-  fetchOrders(username, pass)
+  fetchOrders()
   {
-    var abcd="";
-    var final="";
-    if(this.state.username!=="admin" && this.props.location.state===undefined)
+    const cookies = new Cookies();
+    var name= cookies.get("name");
+    var pass= cookies.get("pass");
+    if(name==="admin" && pass==="password")
     {
-      alert("if 1");
-      this.props.history.push("/");
-    }
-    else if(this.props.location.state!==undefined)
-    {
-      final=this.props.location.state.username+':'+this.props.location.state.password;
-      this.setState({username: this.props.location.username, password: this.props.location.password});
-      abcd=btoa(final);
-      console.log(abcd);
+      var abcd = btoa(name+":"+pass);
       axios.get('http://localhost:3001/admin',{headers: {"Authorization": `Basic ${abcd}`}})
       .then((response) => {
           const ord = this.handleOrder(response.data);
@@ -45,17 +38,10 @@ export default class Admin extends Component {
       console.log(error);
       this.props.history.push("/");
       });
+
     }
     else{
-      axios.get('http://localhost:3001/admin')
-      .then((response) => {
-        const ord = this.handleOrder(response.data);
-        ord.reverse();
-        this.setState({orders: ord});
-      })
-      .catch(error => {
-      console.log(error);
-      });
+      this.props.history.push('/');
     }
   }
 

@@ -4,15 +4,11 @@ const RenderHeading = (props) =>
     {
         if(props.dishSelected.length>0)
         {
-            return(
-                <div>
-                <h3 className="header">Order Summary</h3>
-                </div>
-            )
+            return null;
         }
         else
         {
-            return null;
+                return(<h5>Ouch! No dishes selected?</h5>);
         }
     }
 
