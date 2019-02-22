@@ -22,26 +22,28 @@ export default class Admin extends Component {
 
   fetchOrders()
   {
-    const cookies = new Cookies();
-    var name= cookies.get("name");
-    var pass= cookies.get("pass");
-    if(name==="admin" && pass==="password")
     {
-      var abcd = btoa(name+":"+pass);
-      axios.get('http://localhost:3001/admin',{headers: {"Authorization": `Basic ${abcd}`}})
-      .then((response) => {
-          const ord = this.handleOrder(response.data);
-          ord.reverse();
-          this.setState({orders: ord});
-      })
-      .catch(error => {
-      console.log(error);
-      this.props.history.push("/");
-      });
+      const cookies = new Cookies();
+      var name= cookies.get("name");
+      var pass= cookies.get("pass");
+      if(name==="admin" && pass==="password")
+      {
+        var abcd = btoa(name+":"+pass);
+        axios.get('http://localhost:3001/admin',{headers: {"Authorization": `Basic ${abcd}`}})
+        .then((response) => {
+            const ord = this.handleOrder(response.data);
+            ord.reverse();
+            this.setState({orders: ord});
+        })
+        .catch(error => {
+        console.log(error);
+        this.props.history.push("/");
+        });
 
-    }
-    else{
-      this.props.history.push('/');
+      }
+      else{
+        this.props.history.push('/');
+      }
     }
   }
 
@@ -55,7 +57,7 @@ export default class Admin extends Component {
                 <div key={dish.id} className="col-4 m-1">
                     <Card key={dish.id}>
                     <CardTitle>{dish.name}</CardTitle>
-                    <CardText>{dish.id}</CardText>
+                    <CardText>No. of item {dish.qty}</CardText>
                     </Card>
                 </div>
             )
@@ -73,7 +75,7 @@ export default class Admin extends Component {
     return (
         <div>
             <div>{this.state.orders}</div>
-            <Button onClick={() => {this.fetchOrders()}}>Display</Button>
+            <Button onClick={this.fetchOrders()}>Display</Button>
         </div>
     );
   }

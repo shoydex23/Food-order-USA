@@ -22,6 +22,12 @@ class Menu extends Component {
         {
             this.state.dishSelected.push(selected);
         }
+        else{
+            var dishes = this.state.dishes;
+            const ind = dishes.findIndex(dish => dish.id===selected);
+            dishes[ind].qty+=1;
+            this.setState({dishes: dishes});
+        }
         this.setState({dishSelected: this.state.dishSelected}); //TO UPDATE in Cart we need to call this function
     }
 
@@ -38,7 +44,7 @@ class Menu extends Component {
     }
 
 
-    handleChange(dishSelectedUpdated,order)
+    handleChange(dishSelectedUpdated,order,selected)
     {
         if(order===1)
         {
@@ -49,18 +55,28 @@ class Menu extends Component {
                 console.log(response);
             })
             .catch(error => {
-            console.log(error);
+                console.log(error);
             });
-            this.setState({dishSelected: []});
+            this.setState({dishSelected: [], dishes: DISHES});
             
         }
         else
         {
             console.log("Order Updated");
-            this.setState({dishSelected: dishSelectedUpdated});
+            var dishes = this.state.dishes;
+            const ind = dishes.findIndex(dish => dish.id===selected);
+            dishes[ind].qty-=1;
+            var qty = dishes[ind].qty;
+            if(qty < 1)
+            {
+                const ind = this.state.dishSelected.indexOf(selected);
+                dishSelectedUpdated.splice(ind,1);
+                this.setState({dishSelected: dishSelectedUpdated});
+                dishes[ind].qty=1;
+            }
+            this.setState({dishes: dishes});
         }
-        
-        
+                
     }
 
     render() {
@@ -72,7 +88,7 @@ class Menu extends Component {
                         <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardSubtitle>{dish.category}</CardSubtitle>
-                        <CardText>{dish.description}</CardText>
+                        <CardText>{dish.description}<br></br>Rs.{dish.price}</CardText>
                         <Button className="dcard button" id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
                         </CardBody>
                     </Card>
