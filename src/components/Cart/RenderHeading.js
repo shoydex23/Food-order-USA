@@ -8,7 +8,7 @@ const RenderHeading = (props) =>
         }
         else
         {
-                return(<h5>Ouch! No dishes selected?</h5>);
+            return(<h5>Ouch! No dishes selected?</h5>);
         }
     }
 

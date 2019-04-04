@@ -57,8 +57,19 @@ class Menu extends Component {
             .catch(error => {
                 console.log(error);
             });
+
             this.setState({dishSelected: [], dishes: DISHES});
             
+            setTimeout(() => {
+                axios.get('http://localhost:3001/count')
+                .then((response) => {
+                    const ord = response.data;
+                    alert("Your order no. is " + ord);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }, 100);  
         }
         else
         {
@@ -88,7 +99,8 @@ class Menu extends Component {
                         <CardBody>
                         <CardTitle>{dish.name}</CardTitle>
                         <CardSubtitle>{dish.category}</CardSubtitle>
-                        <CardText>{dish.description}<br></br>Rs.{dish.price}</CardText>
+                        <CardText>{dish.description}</CardText>
+                        <CardText className="price">Rs. {dish.price}</CardText>
                         <Button className="dcard button" id={"button"+dish.id} onClick={() => this.onSelect(dish.id)}>Add to Cart</Button>
                         </CardBody>
                     </Card>

@@ -17,17 +17,26 @@ export default class Admin extends Component {
       orders: [],
       username: "",
       password: "" ,
+      countvisit: false
     };
   }
 
+  componentDidMount()
+  {
+    this.fetchOrders();
+  }
+  
   fetchOrders()
   {
+    
     {
       const cookies = new Cookies();
       var name= cookies.get("name");
       var pass= cookies.get("pass");
-      if(name==="admin" && pass==="password")
+      
+      if(cookies.get("countvisit")===undefined || (name==="admin" && pass==="password"))
       {
+        this.setState({countvisit:true});
         var abcd = btoa(name+":"+pass);
         axios.get('http://localhost:3001/admin',{headers: {"Authorization": `Basic ${abcd}`}})
         .then((response) => {
@@ -36,10 +45,24 @@ export default class Admin extends Component {
             this.setState({orders: ord});
         })
         .catch(error => {
-        console.log(error);
-        this.props.history.push("/");
+            console.log(error);
+            this.props.history.push("/");
         });
 
+      }
+      else if(this.state.countvisit)
+      {
+        axios.get('http://localhost:3001/order')
+        .then((response) => {
+            const ord = this.handleOrder(response.data);
+            ord.reverse();
+            this.setState({orders: ord});
+        })
+        .catch(error => {
+            console.log(error);
+            this.props.history.push("/");
+        });
+        
       }
       else{
         this.props.history.push('/');
@@ -57,7 +80,7 @@ export default class Admin extends Component {
                 <div key={dish.id} className="col-4 m-1">
                     <Card key={dish.id}>
                     <CardTitle>{dish.name}</CardTitle>
-                    <CardText>No. of item {dish.qty}</CardText>
+                    <CardText>Quantity: {dish.qty}</CardText>
                     </Card>
                 </div>
             )
@@ -71,11 +94,11 @@ export default class Admin extends Component {
   }
 
   render() {
-
     return (
         <div>
+            <Button onClick={() => this.fetchOrders()}>Refresh</Button>
+            <br></br><br></br>
             <div>{this.state.orders}</div>
-            <Button onClick={this.fetchOrders()}>Display</Button>
         </div>
     );
   }

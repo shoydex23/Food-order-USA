@@ -24,25 +24,23 @@ class RenderDishes extends Component
 
     removeDish(index)
     {
-
-        console.log(this.props.dishSelected);
         var par=this.props.dishSelected;
-        //var ind=this.props.dishSelected.indexOf(index);
-        //par.splice(ind,1);
-        console.log(this.props.dishSelected);
         this.props.handleChange(par,0,index);
     }
 
     render()
     {
+        var sum=0;
         var menu = this.state.dishes.map((dish) => {
-                if (this.checkIndex(dish))    
-                {   return (
+                if (this.checkIndex(dish)) 
+
+                {   sum+=Math.round(dish.qty*dish.price*100)/100;
+                    return (
                     <div key={dish.id} className="col-12 m-1">
                         <Card className="ccard" key={dish.id}>
                         <CardTitle>{dish.name}</CardTitle>
-                        <CardText>{dish.category}</CardText>
-                        <CardText>{dish.qty}</CardText>
+                        <CardText>Quantity: {dish.qty}</CardText>
+                        <CardText>Rs. {Math.round(dish.qty*dish.price*100)/100}</CardText>
                         <Button className="ccard" onClick={()=>this.removeDish(dish.id)}>Remove from Cart</Button>
                         </Card>
                     </div>
@@ -52,7 +50,7 @@ class RenderDishes extends Component
                     return null;
                 }
             });
-        
+        if(sum>0) {menu.push(<div><br></br><h4>Total: Rs. {Math.round(sum * 100) / 100}</h4><br></br></div>);}
         return menu;
     }
 }

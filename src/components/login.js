@@ -49,6 +49,7 @@ export default class Login extends Component {
     const cookie= new Cookies();
     cookie.set("name", "admin");
     cookie.set("pass", "password");
+    cookie.set("countvisit","defined");
   }
 
   render() {
